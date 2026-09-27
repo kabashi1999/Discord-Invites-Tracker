@@ -1,39 +1,110 @@
-# Discord Invite Tracker + Rewards Bot
+<div align="center">
 
-A production-ready Discord bot that accurately tracks who invited each new
-member, stores everything permanently in MongoDB, shows members a generated
-progress-card image, and gives admins a fully interactive, no-code rewards
-system.
+# 🎉 Discord Invite Tracker + Rewards Bot
+
+**Accurately tracks who invited each member, generates beautiful progress-card images, and lets admins run a fully dynamic rewards program — no code changes, ever.**
+
+[![Node.js](https://img.shields.io/badge/node-%3E%3D20.0.0-339933?logo=node.js&logoColor=white)](https://nodejs.org)
+[![discord.js](https://img.shields.io/badge/discord.js-v14-5865F2?logo=discord&logoColor=white)](https://discord.js.org)
+[![MongoDB](https://img.shields.io/badge/database-MongoDB-47A248?logo=mongodb&logoColor=white)](https://www.mongodb.com)
+[![PM2](https://img.shields.io/badge/process%20manager-PM2-2B037A?logo=pm2&logoColor=white)](https://pm2.keymetrics.io)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](#license)
+
+</div>
+
+---
+
+## Preview
+
+<table>
+<tr>
+<td align="center" width="60%"><strong><code>/invites</code> progress card</strong><br/><sub>generated PNG, Arabic + Latin text, updates live</sub></td>
+<td align="center" width="40%"><strong><code>/admin</code> control panel</strong><br/><sub>select-menu driven, fully interactive</sub></td>
+</tr>
+<tr>
+<td><img src="docs/images/invites-card-preview.svg" alt="Preview of the /invites generated progress card" width="100%"/></td>
+<td><img src="docs/images/admin-panel-preview.svg" alt="Preview of the /admin control panel" width="100%"/></td>
+</tr>
+</table>
+
+<p align="center">
+<img src="docs/images/claim-request-preview.svg" alt="Preview of a reward claim request with Accept/Reject buttons" width="70%"/>
+</p>
+
+> The images above are illustrative mockups of the actual runtime output (built to match `imageGenerator.js` and `adminPanel.js` pixel-for-pixel), not static assets — every real card and panel is generated live from live data. Swap in real screenshots from your own server any time by replacing the files in `docs/images/`.
+
+---
+
+## Table of Contents
+
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [How It Works](#how-it-works)
+- [Prerequisites](#prerequisites)
+- [Discord Application Setup](#discord-application-setup)
+- [Local Development](#local-development)
+- [Production Deployment with PM2](#production-deployment-with-pm2)
+- [First-time Configuration](#first-time-configuration)
+- [Commands](#commands)
+- [Project Structure](#project-structure)
+- [Database Models](#database-models)
+- [Troubleshooting](#troubleshooting)
+
+---
 
 ## Features
 
-- **Accurate invite tracking** — detects the inviter by diffing the guild's
-  invite cache before/after each join. Handles normal invites, vanity URLs,
-  unknown/deleted invite codes, leaves, and rejoins (a rejoin is never
-  double-counted as a new valid invite).
-- **`/invites` progress card** — a generated PNG image with avatar, total
-  valid invites, progress bar, next reward, and Arabic-language labels
-  (Noto Sans Arabic, fully offline — no external image APIs).
-- **Fully dynamic rewards** — created, edited, enabled/disabled, and deleted
-  entirely from Discord. Nothing is hardcoded.
-- **Claim flow** — `/claim` posts a request with Accept/Reject buttons to a
-  configurable channel; accepting/rejecting notifies the member by DM.
-- **`/admin` control panel** — a single interactive command (select menus,
-  buttons, modals) for reward CRUD, manual invite adjustments, resets,
-  lookups, pending/claimed history, and channel/role configuration.
-- **`/leaderboard`** — top inviters, ranked.
-- **Full logging** — every important action is written to a configurable
-  logs channel.
-- **Multi-guild support** — everything is scoped by `guildId`.
+- 🎯 **Accurate invite tracking** — detects the inviter by diffing the guild's invite cache before/after each join. Handles normal invites, vanity URLs, unknown/deleted invite codes, leaves, and rejoins (a rejoin is never double-counted as a new valid invite).
+- 🖼️ **`/invites` progress card** — a generated PNG image with avatar, total valid invites, progress bar, next reward, and Arabic-language labels (Noto Sans Arabic, fully offline — no external image APIs).
+- 🎁 **Fully dynamic rewards** — created, edited, enabled/disabled, and deleted entirely from Discord. Nothing is hardcoded.
+- ✅ **Claim flow** — `/claim` posts a request with Accept/Reject buttons to a configurable channel; accepting/rejecting notifies the member by DM.
+- 🛠️ **`/admin` control panel** — a single interactive command (select menus, buttons, modals) for reward CRUD, manual invite adjustments, resets, lookups, pending/claimed history, and channel/role configuration.
+- 🏆 **`/leaderboard`** — top inviters, ranked.
+- 🧾 **Full logging** — every important action is written to a configurable logs channel.
+- 🌐 **Multi-guild support** — everything is scoped by `guildId`.
 
 ## Tech Stack
 
-- Node.js 20+
-- discord.js v14
-- MongoDB + Mongoose
-- @napi-rs/canvas (offline image generation)
-- PM2 for process management
-- ES Modules
+| | |
+|---|---|
+| Runtime | Node.js 20+, ES Modules |
+| Discord | discord.js v14 |
+| Database | MongoDB + Mongoose |
+| Images | @napi-rs/canvas (offline, no external APIs) |
+| Process manager | PM2 |
+
+## How It Works
+
+**Invite attribution**, on every `guildMemberAdd`:
+
+```mermaid
+flowchart LR
+    A[Member joins] --> B{Diff invite cache<br/>before vs after}
+    B -->|use count went up| C[Normal invite<br/>attribute to inviter]
+    B -->|invite vanished<br/>single-use consumed| C
+    B -->|vanity URL uses went up| D[Vanity join<br/>no specific inviter]
+    B -->|no match found| E[Unknown join<br/>logged, not attributed]
+    C --> F{Has this user<br/>joined before?}
+    F -->|No| G[✅ Valid invite<br/>inviter count +1]
+    F -->|Yes, rejoin| H[⚠️ Logged but<br/>NOT re-counted]
+```
+
+**Reward claim flow**, from `/claim` to resolution:
+
+```mermaid
+sequenceDiagram
+    participant M as Member
+    participant B as Bot
+    participant C as Reward Requests Channel
+    participant A as Admin
+
+    M->>B: /claim
+    B->>B: Check valid invites vs enabled rewards
+    B->>C: Post request (Accept/Reject buttons)
+    A->>C: Click Accept or Reject
+    C->>B: Update claim status in MongoDB
+    B-->>M: DM notification (accepted/rejected)
+```
 
 ---
 
@@ -206,6 +277,7 @@ they qualify for a reward.
 │   ├── services/                # inviteTracker.js, imageGenerator.js, rewardService.js
 │   └── utils/                   # logger.js, permissions.js
 ├── assets/fonts/                # Arabic + Latin .ttf files (see Fonts section)
+├── docs/images/                 # README preview images
 ├── .env.example
 ├── package.json
 ├── ecosystem.config.cjs
@@ -273,3 +345,15 @@ they qualify for a reward.
   hour** to propagate new/changed commands to all servers.
 - Try fully restarting your Discord client (Ctrl/Cmd+R or relaunch) — the
   client caches the command list.
+
+---
+
+## License
+
+Released under the [MIT License](LICENSE) — free to use, modify, and self-host.
+
+---
+
+<div align="center">
+<sub>Built with discord.js, Mongoose, and @napi-rs/canvas.</sub>
+</div>
