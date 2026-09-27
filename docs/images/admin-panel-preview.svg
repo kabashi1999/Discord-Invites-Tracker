@@ -1,0 +1,34 @@
+<svg width="900" height="480" viewBox="0 0 900 480" xmlns="http://www.w3.org/2000/svg">
+  <rect width="900" height="480" fill="#313338"/>
+
+  <!-- bot avatar -->
+  <circle cx="50" cy="46" r="20" fill="#5865F2"/>
+  <text x="50" y="52" font-family="Arial, sans-serif" font-size="16" fill="#ffffff" text-anchor="middle">🤖</text>
+  <text x="80" y="42" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#f2f3f5">Invite Tracker</text>
+  <text x="215" y="42" font-family="Arial, sans-serif" font-size="12" fill="#5865F2">BOT</text>
+  <text x="80" y="60" font-family="Arial, sans-serif" font-size="12" fill="#949ba4">Only you can see this — Today at 4:12 PM</text>
+
+  <!-- embed card -->
+  <rect x="80" y="80" width="620" height="150" rx="4" fill="#2b2d31"/>
+  <rect x="80" y="80" width="4" height="150" fill="#5865F2"/>
+  <text x="104" y="112" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#f2f3f5">🛠️ Invite Tracker — Admin Panel</text>
+  <text x="104" y="140" font-family="Arial, sans-serif" font-size="14" fill="#dbdee1">Choose a section below to manage.</text>
+
+  <!-- select menu -->
+  <rect x="80" y="245" width="440" height="42" rx="8" fill="#1e1f22" stroke="#1a1b1e" stroke-width="1"/>
+  <text x="100" y="271" font-family="Arial, sans-serif" font-size="14" fill="#949ba4">Select a section...</text>
+  <path d="M 495 260 L 505 270 L 515 260" stroke="#949ba4" stroke-width="2" fill="none"/>
+
+  <!-- dropdown open list -->
+  <rect x="80" y="292" width="440" height="180" rx="8" fill="#1e1f22"/>
+  <g font-family="Arial, sans-serif" font-size="13" fill="#dbdee1">
+    <text x="100" y="318">🎁 Manage Rewards</text>
+    <text x="100" y="346">➕ Adjust Member Invites</text>
+    <text x="100" y="374">🔄 Reset Member Invites</text>
+    <text x="100" y="402">🔎 View Invite Count</text>
+    <text x="100" y="430">📋 View Invited Users</text>
+    <text x="100" y="458">⏳ Pending Reward Requests</text>
+  </g>
+
+  <text x="450" y="472" font-family="Arial, sans-serif" font-size="12" fill="#6b7280" text-anchor="middle">Illustrative mockup — rendered by adminPanel.js at runtime via Discord embeds/select menus</text>
+</svg>

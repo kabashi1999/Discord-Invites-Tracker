@@ -1,0 +1,32 @@
+<svg width="900" height="330" viewBox="0 0 900 330" xmlns="http://www.w3.org/2000/svg">
+  <rect width="900" height="330" fill="#313338"/>
+
+  <circle cx="50" cy="46" r="20" fill="#5865F2"/>
+  <text x="50" y="52" font-family="Arial, sans-serif" font-size="16" fill="#ffffff" text-anchor="middle">🤖</text>
+  <text x="80" y="42" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#f2f3f5">Invite Tracker</text>
+  <text x="215" y="42" font-family="Arial, sans-serif" font-size="12" fill="#5865F2">BOT</text>
+  <text x="80" y="60" font-family="Arial, sans-serif" font-size="12" fill="#949ba4">#reward-requests — Today at 4:15 PM</text>
+
+  <!-- embed card -->
+  <rect x="80" y="80" width="650" height="200" rx="4" fill="#2b2d31"/>
+  <rect x="80" y="80" width="4" height="200" fill="#fee75c"/>
+  <text x="104" y="110" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#f2f3f5">🎁 New Reward Claim Request</text>
+
+  <text x="104" y="138" font-family="Arial, sans-serif" font-size="12" fill="#949ba4">MEMBER</text>
+  <text x="104" y="156" font-family="Arial, sans-serif" font-size="14" fill="#dbdee1">@Ahmed_Games (ahmed#0421)</text>
+
+  <text x="104" y="182" font-family="Arial, sans-serif" font-size="12" fill="#949ba4">VALID INVITES</text>
+  <text x="104" y="200" font-family="Arial, sans-serif" font-size="14" fill="#dbdee1">55</text>
+
+  <text x="360" y="182" font-family="Arial, sans-serif" font-size="12" fill="#949ba4">REWARD</text>
+  <text x="360" y="200" font-family="Arial, sans-serif" font-size="14" fill="#dbdee1">Discord Nitro</text>
+
+  <!-- buttons -->
+  <rect x="104" y="222" width="90" height="36" rx="6" fill="#248046"/>
+  <text x="149" y="245" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" text-anchor="middle">Accept</text>
+
+  <rect x="204" y="222" width="90" height="36" rx="6" fill="#da373c"/>
+  <text x="249" y="245" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" text-anchor="middle">Reject</text>
+
+  <text x="450" y="312" font-family="Arial, sans-serif" font-size="12" fill="#6b7280" text-anchor="middle">Illustrative mockup — rendered by claimFlow.js at runtime</text>
+</svg>

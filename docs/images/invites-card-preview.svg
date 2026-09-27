@@ -1,0 +1,46 @@
+<svg width="1000" height="420" viewBox="0 0 1000 420" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1000" y2="420" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1e1f3b"/>
+      <stop offset="1" stop-color="#2b2d5e"/>
+    </linearGradient>
+    <linearGradient id="bar" x1="50" y1="0" x2="950" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#22d3ee"/>
+      <stop offset="1" stop-color="#6366f1"/>
+    </linearGradient>
+    <clipPath id="avatarClip">
+      <circle cx="120" cy="120" r="70"/>
+    </clipPath>
+  </defs>
+
+  <rect x="0" y="0" width="1000" height="420" rx="28" fill="url(#bg)"/>
+  <rect x="0" y="0" width="12" height="420" rx="6" fill="#5865F2"/>
+
+  <!-- avatar -->
+  <circle cx="120" cy="120" r="70" fill="#5865F2"/>
+  <g clip-path="url(#avatarClip)">
+    <circle cx="120" cy="120" r="70" fill="#3f4270"/>
+    <circle cx="120" cy="98" r="26" fill="#7d81c4"/>
+    <ellipse cx="120" cy="168" rx="46" ry="34" fill="#7d81c4"/>
+  </g>
+  <circle cx="120" cy="120" r="70" fill="none" stroke="#ffffff33" stroke-width="4"/>
+
+  <!-- username + count -->
+  <text x="220" y="96" font-family="Arial, sans-serif" font-size="36" font-weight="bold" fill="#ffffff">Ahmed_Games</text>
+  <text x="220" y="177" font-family="Arial, sans-serif" font-size="72" font-weight="bold" fill="#7dd3fc">55</text>
+
+  <!-- arabic summary lines (right aligned) -->
+  <text x="950" y="65" font-family="'Noto Sans Arabic', Arial, sans-serif" font-size="28" fill="#e5e7eb" text-anchor="end">مجموع دعواتك: 55</text>
+  <text x="950" y="105" font-family="'Noto Sans Arabic', Arial, sans-serif" font-size="24" fill="#e5e7eb" text-anchor="end">باقي لك 65 دعوة للمكافأة التالية</text>
+  <text x="950" y="140" font-family="'Noto Sans Arabic', Arial, sans-serif" font-size="24" fill="#facc15" text-anchor="end">المكافأة التالية: Discord Nitro</text>
+
+  <!-- progress bar -->
+  <rect x="50" y="240" width="900" height="34" rx="17" fill="#00000055"/>
+  <rect x="50" y="240" width="315" height="34" rx="17" fill="url(#bar)"/>
+  <text x="500" y="262" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#ffffff" text-anchor="middle">35%</text>
+
+  <!-- last invited -->
+  <text x="950" y="320" font-family="'Noto Sans Arabic', Arial, sans-serif" font-size="20" fill="#9ca3af" text-anchor="end">آخر شخص قمت بدعوته: Sara_K</text>
+
+  <text x="500" y="405" font-family="Arial, sans-serif" font-size="13" fill="#6b7280" text-anchor="middle">Illustrative mockup — actual output is generated at runtime by @napi-rs/canvas</text>
+</svg>
